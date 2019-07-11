@@ -2,13 +2,16 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+const cards = document.querySelector(".cards");
+
 axios
   .get("https://api.github.com/users/ZacharyLasky")
   .then(data => {
     console.log("DATA:", data);
+    cards.appendChild();
   })
   .catch(error => {
-    console.log("ERROR", error);
+    console.log("ERROR:", error);
   });
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
@@ -75,9 +78,16 @@ function cardsComponent(obj) {
   bio.classList.add("p");
 
   //CONTENT
-  aTags.href = { url } > { url };
-  Image.src = { img };
-  userName.textContent = { login };
+  userImg.src = obj.avatar_url;
+  name.textContent = obj.name;
+  userName.textContent = obj.login;
+  location.textContent = `Location: ${obj.location}`;
+  profile.textContent = "Profile";
+  aTags.href = obj.html_url;
+  aTags.textContent = obj.html_url;
+  followers.textContent = `Followers: ${obj.followers}`;
+  following.textContent = `Following: ${obj.following}`;
+  bio.textContent = obj.bio;
 }
 
 // <div class="card">
