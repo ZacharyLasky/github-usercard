@@ -70,7 +70,7 @@ function cardsComponent(obj) {
   cardInfo.appendChild(userName);
   cardInfo.appendChild(location);
   cardInfo.appendChild(profile);
-  cardInfo.appendChild(aTags);
+
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
@@ -86,6 +86,7 @@ function cardsComponent(obj) {
   userName.textContent = obj.login;
   location.textContent = `Location: ${obj.location}`;
   profile.textContent = "Profile:";
+  profile.appendChild(aTags);
   aTags.href = obj.html_url;
   aTags.textContent = obj.html_url;
   followers.textContent = `Followers: ${obj.followers}`;
