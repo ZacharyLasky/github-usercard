@@ -3,16 +3,27 @@
            https://api.github.com/users/<your name>
 */
 const cards = document.querySelector(".cards");
+const followersArray = [
+  "tetondan",
+  "dustinmyers",
+  "justsml",
+  "luishrd",
+  "bigknell"
+];
 
-axios
-  .get("https://api.github.com/users/ZacharyLasky")
-  .then(data => {
-    console.log("DATA:", data);
-    cards.appendChild();
-  })
-  .catch(error => {
-    console.log("ERROR:", error);
-  });
+followersArray.forEach(user => {
+  axios
+    .get(`https://api.github.com/users/${user}`)
+    .then(data => {
+      console.log("DATA:", data);
+
+      const element = cardsComponent(data.data);
+      cards.appendChild(element);
+    })
+    .catch(error => {
+      console.log("ERROR:", error);
+    });
+});
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -34,8 +45,6 @@ axios
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
-
-const followersArray = [];
 
 // // Step 3: Create a function that accepts a single object as its only argument,
 //           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -61,33 +70,29 @@ function cardsComponent(obj) {
   cardInfo.appendChild(userName);
   cardInfo.appendChild(location);
   cardInfo.appendChild(profile);
-  profile.appendChild(aTags);
+  cardInfo.appendChild(aTags);
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
 
   //STYLE
-  card.classList.add(".card");
-  name.classList.add(".name");
-  userName.classList.add(".username");
-  userName.classList.add("p");
-  location.classList.add("p");
-  profile.classList.add("p");
-  followers.classList.add("p");
-  following.classList.add("p");
-  bio.classList.add("p");
+  card.classList.add("card");
+  name.classList.add("name");
+  userName.classList.add("username");
 
   //CONTENT
   userImg.src = obj.avatar_url;
   name.textContent = obj.name;
   userName.textContent = obj.login;
   location.textContent = `Location: ${obj.location}`;
-  profile.textContent = "Profile";
+  profile.textContent = "Profile:";
   aTags.href = obj.html_url;
   aTags.textContent = obj.html_url;
   followers.textContent = `Followers: ${obj.followers}`;
   following.textContent = `Following: ${obj.following}`;
   bio.textContent = obj.bio;
+
+  return card;
 }
 
 // <div class="card">
