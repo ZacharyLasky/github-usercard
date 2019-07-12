@@ -15,10 +15,9 @@ followersArray.forEach(user => {
   axios
     .get(`https://api.github.com/users/${user}`)
     .then(data => {
-      console.log("DATA:", data);
-
       const element = cardsComponent(data.data);
       cards.appendChild(element);
+      console.log("DATA:", data);
     })
     .catch(error => {
       console.log("ERROR:", error);
@@ -62,7 +61,17 @@ function cardsComponent(obj) {
   let followers = document.createElement("p");
   let following = document.createElement("p");
   let bio = document.createElement("p");
-
+  //CONTENT
+  userImg.src = obj.avatar_url;
+  name.textContent = obj.name;
+  userName.textContent = obj.login;
+  location.textContent = `Location: ${obj.location}`;
+  profile.textContent = "Profile: ";
+  aTags.href = obj.html_url;
+  aTags.textContent = obj.html_url;
+  followers.textContent = `Followers: ${obj.followers}`;
+  following.textContent = `Following: ${obj.following}`;
+  bio.textContent = obj.bio;
   //PUT TOGETHER
   card.appendChild(userImg);
   card.appendChild(cardInfo);
@@ -70,28 +79,14 @@ function cardsComponent(obj) {
   cardInfo.appendChild(userName);
   cardInfo.appendChild(location);
   cardInfo.appendChild(profile);
-
+  profile.appendChild(aTags);
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
-
   //STYLE
   card.classList.add("card");
   name.classList.add("name");
   userName.classList.add("username");
-
-  //CONTENT
-  userImg.src = obj.avatar_url;
-  name.textContent = obj.name;
-  userName.textContent = obj.login;
-  location.textContent = `Location: ${obj.location}`;
-  profile.textContent = "Profile:";
-  profile.appendChild(aTags);
-  aTags.href = obj.html_url;
-  aTags.textContent = obj.html_url;
-  followers.textContent = `Followers: ${obj.followers}`;
-  following.textContent = `Following: ${obj.following}`;
-  bio.textContent = obj.bio;
 
   return card;
 }
