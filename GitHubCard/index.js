@@ -73,16 +73,11 @@ function cardsComponent(obj) {
   following.textContent = `Following: ${obj.following}`;
   bio.textContent = obj.bio;
   //PUT TOGETHER
-  card.appendChild(userImg);
-  card.appendChild(cardInfo);
-  cardInfo.appendChild(name);
-  cardInfo.appendChild(userName);
-  cardInfo.appendChild(location);
-  cardInfo.appendChild(profile);
-  profile.appendChild(aTags);
-  cardInfo.appendChild(followers);
-  cardInfo.appendChild(following);
-  cardInfo.appendChild(bio);
+  card.append(userImg);
+  card.append(cardInfo);
+  cardInfo.append(name, userName, location, profile, followers, following, bio);
+  profile.append(aTags);
+
   //STYLE
   card.classList.add("card");
   name.classList.add("name");
