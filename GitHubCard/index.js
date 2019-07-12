@@ -50,17 +50,17 @@ followersArray.forEach(user => {
 
 function cardsComponent(obj) {
   //SELECT
-  let card = document.createElement("div");
-  let userImg = document.createElement("img");
-  let cardInfo = document.createElement("div");
-  let name = document.createElement("h3");
-  let userName = document.createElement("p");
-  let location = document.createElement("p");
-  let profile = document.createElement("p");
-  let aTags = document.createElement("a");
-  let followers = document.createElement("p");
-  let following = document.createElement("p");
-  let bio = document.createElement("p");
+  let card = document.createElement("div"),
+    userImg = document.createElement("img"),
+    cardInfo = document.createElement("div"),
+    name = document.createElement("h3"),
+    userName = document.createElement("p"),
+    location = document.createElement("p"),
+    profile = document.createElement("p"),
+    aTags = document.createElement("a"),
+    followers = document.createElement("p"),
+    following = document.createElement("p"),
+    bio = document.createElement("p");
   //CONTENT
   userImg.src = obj.avatar_url;
   name.textContent = obj.name;
