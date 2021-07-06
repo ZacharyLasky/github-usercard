@@ -2,6 +2,27 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+const cards = document.querySelector(".cards");
+const followersArray = [
+  "tetondan",
+  "dustinmyers",
+  "justsml",
+  "luishrd",
+  "bigknell"
+];
+
+followersArray.forEach(user => {
+  axios
+    .get(`https://api.github.com/users/${user}`)
+    .then(data => {
+      const element = cardsComponent(data.data);
+      cards.appendChild(element);
+      console.log("DATA:", data);
+    })
+    .catch(error => {
+      console.log("ERROR:", error);
+    });
+});
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -24,27 +45,61 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+// // Step 3: Create a function that accepts a single object as its only argument,
+//           Using DOM methods and properties, create a component that will return the following DOM element:
 
-/* Step 3: Create a function that accepts a single object as its only argument,
-          Using DOM methods and properties, create a component that will return the following DOM element:
+function cardsComponent(obj) {
+  //SELECT
+  let card = document.createElement("div"),
+    userImg = document.createElement("img"),
+    cardInfo = document.createElement("div"),
+    name = document.createElement("h3"),
+    userName = document.createElement("p"),
+    location = document.createElement("p"),
+    profile = document.createElement("p"),
+    aTags = document.createElement("a"),
+    followers = document.createElement("p"),
+    following = document.createElement("p"),
+    bio = document.createElement("p");
+  //CONTENT
+  userImg.src = obj.avatar_url;
+  name.textContent = obj.name;
+  userName.textContent = obj.login;
+  location.textContent = `Location: ${obj.location}`;
+  profile.textContent = "Profile: ";
+  aTags.href = obj.html_url;
+  aTags.textContent = obj.html_url;
+  followers.textContent = `Followers: ${obj.followers}`;
+  following.textContent = `Following: ${obj.following}`;
+  bio.textContent = obj.bio;
+  //PUT TOGETHER
+  card.append(userImg);
+  card.append(cardInfo);
+  cardInfo.append(name, userName, location, profile, followers, following, bio);
+  profile.append(aTags);
 
-<div class="card">
-  <img src={image url of user} />
-  <div class="card-info">
-    <h3 class="name">{users name}</h3>
-    <p class="username">{users user name}</p>
-    <p>Location: {users location}</p>
-    <p>Profile:  
-      <a href={address to users github page}>{address to users github page}</a>
-    </p>
-    <p>Followers: {users followers count}</p>
-    <p>Following: {users following count}</p>
-    <p>Bio: {users bio}</p>
-  </div>
-</div>
+  //STYLE
+  card.classList.add("card");
+  name.classList.add("name");
+  userName.classList.add("username");
 
-*/
+  return card;
+}
+
+// <div class="card">
+//   <img src={image url of user} />
+//   <div class="card-info">
+//     <h3 class="name">{users name}</h3>
+//     <p class="username">{users user name}</p>
+//     <p>Location: {users location}</p>
+//     <p>Profile:
+//       <a href={address to users github page}>{address to users github page}</a>
+//     </p>
+//     <p>Followers: {users followers count}</p>
+//     <p>Following: {users following count}</p>
+//     <p>Bio: {users bio}</p>
+//   </div>
+// </div>
 
 /* List of LS Instructors Github username's: 
   tetondan
